@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>mariadb-connector-c</ProjectName>
+    <RootNamespace>mariadb-connector-c</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{DFAEDF8A-61C4-4269-AA6B-790E7FB98BCE}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <Import Project="mariadb-connector-c-version.props" />
+  <Import Project="buildpackages.task" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+    <CmakePlatform></CmakePlatform>    
+    <CmakeConfiguration>Debug</CmakeConfiguration>    
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+    <CmakePlatform>-A x64</CmakePlatform>
+    <CmakeConfiguration>Debug</CmakeConfiguration>    
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+    <CmakePlatform></CmakePlatform>
+    <CmakeConfiguration>RelWithDebInfo</CmakeConfiguration>    
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+    <CmakePlatform>-A x64</CmakePlatform>
+    <CmakeConfiguration>RelWithDebInfo</CmakeConfiguration>    
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <CmakeBuildDir>$(BaseDir)Build\$(Platform)\$(CmakeConfiguration)</CmakeBuildDir>
+  </PropertyGroup>
+  <Target Name="Build">
+    <MakeDir Directories="$(CmakeBuildDir)" />
+    <Exec 
+        WorkingDirectory="$(CmakeBuildDir)\"
+        Command="cmake $(CmakePlatform) $(BaseDir)\mariadb-connector-c-$(mariadb-connector-cVersion) -DCMAKE_BUILD_TYPE=$(Configuration) -DCMAKE_INSTALL_PREFIX=$(BaseDir)install\$(Platform)\$(Configuration)" ConsoleToMSBuild="true" 
+    />
+    <MsBuild Projects="$(CmakeBuildDir)\mariadb-connector-c.sln"
+             Properties="Platform=$(Platform);Configuration=$(CmakeConfiguration);VisualStudioVersion=15.0"
+    />
+    <MsBuild Projects="$(CmakeBuildDir)\INSTALL.vcxproj"
+             Properties="Platform=$(Platform);Configuration=$(CmakeConfiguration);VisualStudioVersion=15.0"
+    />
+  </Target>
+</Project>
