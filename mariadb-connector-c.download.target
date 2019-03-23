@@ -26,7 +26,7 @@
 
   <Target Name="mariadb-connector-cDownloadTarget" BeforeTargets="Build" DependsOnTargets="7za">  
       <DownloadPackageTask 
-           package="http://files.freeswitch.org/downloads/libs/mariadb-connector-c-$(mariadb-connector-cVersion).tar.gz"
+           package="http://files.freeswitch.org/downloads/libs/mariadb-connector-c-$(mariadb-connector-cVersion)-src.tar.gz"
            expectfileordirectory="$(BaseDir)mariadb-connector-c-$(mariadb-connector-cVersion)" 
            outputfolder=""
            outputfilename="" 

@@ -4,8 +4,8 @@
     <Import Project="basedir.props" Condition=" '$(BaseDirImported)' == ''"/>
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
-    <mariadb-connector-cVersion>3.0.3</mariadb-connector-cVersion>
-    <mariadb-connector-cLibDir>$(BaseDir)mariadb-connector-c-$(mariadb-connector-cVersion)</mariadb-connector-cLibDir>
+    <mariadb-connector-cVersion>3.0.9</mariadb-connector-cVersion>
+    <mariadb-connector-cLibDir>$(BaseDir)mariadb-connector-c-$(mariadb-connector-cVersion)-src</mariadb-connector-cLibDir>
   </PropertyGroup>
   <PropertyGroup>
     <mariadb-connector-cVersionImported>true</mariadb-connector-cVersionImported>

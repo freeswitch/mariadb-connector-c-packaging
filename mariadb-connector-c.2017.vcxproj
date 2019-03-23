@@ -58,7 +58,7 @@
     <MakeDir Directories="$(CmakeBuildDir)" />
     <Exec 
         WorkingDirectory="$(CmakeBuildDir)\"
-        Command="cmake $(CmakePlatform) $(BaseDir)\mariadb-connector-c-$(mariadb-connector-cVersion) -DCMAKE_BUILD_TYPE=$(Configuration) -DCMAKE_INSTALL_PREFIX=$(BaseDir)install\$(Platform)\$(Configuration)" ConsoleToMSBuild="true" 
+        Command="cmake $(CmakePlatform) $(BaseDir)\mariadb-connector-c-$(mariadb-connector-cVersion)-src -DCMAKE_BUILD_TYPE=$(Configuration) -DCMAKE_INSTALL_PREFIX=$(BaseDir)install\$(Platform)\$(Configuration) -DPLUGINDIR=libmariadb_plugin" ConsoleToMSBuild="true" 
     />
     <MsBuild Projects="$(CmakeBuildDir)\mariadb-connector-c.sln"
              Properties="Platform=$(Platform);Configuration=$(CmakeConfiguration);VisualStudioVersion=15.0"
