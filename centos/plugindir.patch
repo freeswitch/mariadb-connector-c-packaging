@@ -1,0 +1,21 @@
+The plugins build system used different path than the mariadb_config, which resulted in plugins that
+couldn't be loaded, because they missed "/usr/" at the beginning of their path.
+
+RH bug:
+  https://bugzilla.redhat.com/show_bug.cgi?id=1624533
+Upstream Bug:
+  https://jira.mariadb.org/browse/CONC-383
+Upstream PR:
+  https://github.com/MariaDB/mariadb-connector-c/pull/105
+
+--- mariadb-connector-c-3.0.9-src/include/mariadb_version.h.in	2019-02-08 16:36:35.000000000 +0100
++++ mariadb-connector-c-3.0.9-src/include/mariadb_version.h.in_patched	2019-03-21 04:11:47.722080986 +0100
+@@ -24,7 +24,7 @@
+ #define MARIADB_PACKAGE_VERSION_ID @MARIADB_PACKAGE_VERSION_ID@
+ #define MARIADB_SYSTEM_TYPE "@CMAKE_SYSTEM_NAME@"
+ #define MARIADB_MACHINE_TYPE "@CMAKE_SYSTEM_PROCESSOR@"
+-#define MARIADB_PLUGINDIR "@PLUGINDIR@"
++#define MARIADB_PLUGINDIR "@CMAKE_INSTALL_PREFIX@/@INSTALL_PLUGINDIR@"
+ 
+ /* mysqld compile time options */
+ #ifndef MYSQL_CHARSET
