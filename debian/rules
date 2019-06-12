@@ -19,3 +19,8 @@ override_dh_auto_configure:
 
 override_dh_makeshlibs:
 	dh_makeshlibs -X/mariadb3/plugin/
+
+override_dh_auto_install:
+	dh_auto_install
+	mkdir -p debian/libmariadb-dev/usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig
+	install -p -m 0644 debian/tmp/usr/lib/pkgconfig/libmariadb.pc debian/libmariadb-dev/usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/
